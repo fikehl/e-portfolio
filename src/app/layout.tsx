@@ -13,9 +13,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Filip Kehl | Junior System Developer",
+  title: "Filip Kehl | Student",
   description:
-    "Portfolio of Filip Kehl - Junior System Developer specializing in .NET, Java, and React.",
+    "Portfolio of Filip Kehl - Student specializing in IT at KTH.",
 };
 
 export default function RootLayout({
