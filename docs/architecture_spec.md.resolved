@@ -1,0 +1,127 @@
+# Component Hierarchy & Architecture Specification
+
+> [!IMPORTANT]
+> This document serves as the technical blueprint for execution by Claude Code.
+
+## 1. Directory Structure Blueprint
+```
+/src
+├── app/
+│   ├── layout.tsx         # Root layout with <Canvas> provider
+│   ├── page.tsx           # Orchestrator for sections
+│   ├── globals.css        # Tailwind directives & custom font loading
+│   └── (routes)/          # Future routes if needed
+├── components/
+│   ├── canvas/            # 3D Scene components
+│   │   ├── Scene.tsx      # Main R3F Canvas setup
+│   │   ├── Hero.tsx       # Interactive 3D Hero element
+│   │   ├── SkillsOrbit.tsx# 3D Skill node system
+│   │   └── Projects.tsx   # 3D Carousel logic
+│   ├── ui/                # HTML/CSS Overlays
+│   │   ├── Overlay.tsx    # Text content container
+│   │   ├── Navbar.tsx     # Fixed navigation
+│   │   └── Loader.tsx     # 3D loading state
+│   └── hooks/             # Custom hooks
+│       └── useStore.ts    # Zustand state management
+└── lib/                   # Utilities
+    └── data.ts            # Static data content
+```
+
+## 2. Component Interfaces
+
+### `Scene.tsx`
+Wraps the entire 3D experience.
+```typescript
+interface SceneProps {
+  children?: React.ReactNode;
+  className?: string; // For positioning
+}
+// Must include <Canvas> from @react-three/fiber
+// Must include <Suspense> for asset loading
+```
+
+### `SkillsOrbit.tsx`
+Displays skills as orbiting 3D nodes.
+```typescript
+interface SkillNode {
+  name: string;
+  category: 'Language' | 'Web' | 'Tool';
+  level: number; // 0-100
+  color: string; // Hex code
+}
+
+// Props
+interface SkillsOrbitProps {
+  data: SkillNode[];
+  radius?: number; // Orbit radius
+  speed?: number;  // Rotation speed
+}
+```
+
+### `Projects.tsx` (Carousel)
+Displays projects in a cylindrical or coverflow layout.
+```typescript
+interface ProjectData {
+  id: string;
+  title: string;
+  description: string;
+  techStack: string[];
+  imageUrl?: string; // Optional cover image texture
+  link?: string;
+}
+
+interface ProjectsCarouselProps {
+  projects: ProjectData[];
+  onSelect?: (project: ProjectData) => void;
+}
+```
+
+## 3. Data Schema (`lib/data.ts`)
+This file should export constant arrays matching the interfaces above.
+
+```typescript
+export const SKILLS = [
+  { name: 'Java', category: 'Language', level: 90, color: '#0070f3' },
+  { name: 'C#', category: 'Language', level: 85, color: '#00BFFF' },
+  { name: 'React', category: 'Web', level: 80, color: '#61dafb' },
+  // ... others extracted from Resume
+];
+
+export const PROJECTS = [
+  // Fill with dummy data if exact project details are missing
+];
+```
+
+## 4. Animation Strategy
+- **Entry**: Staggered fade-in for UI elements (`framer-motion`).
+- **Scroll**: Parallax effect on 3D camera position (`useScroll` from `@react-three/drei`).
+- **Interaction**:
+  - `onPointerOver`: Scale up 3D nodes (1.2x).
+  - `onClick`: Focus camera on specific section.
+
+## 5. Design Tokens (Tailwind)
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        abyss: {
+          900: '#050505', // Deep Black
+          800: '#0a0a0a',
+          DEFAULT: '#000000',
+        },
+        nebula: {
+          500: '#0070f3', // Primary Blue
+          400: '#00BFFF', // Cyan/Blue
+          glow: 'rgba(0, 112, 243, 0.5)',
+        }
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        mono: ['var(--font-jetbrains-mono)'],
+      }
+    }
+  }
+}
+```

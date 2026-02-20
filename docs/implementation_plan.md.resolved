@@ -1,0 +1,88 @@
+# E-Portfolio Implementation Plan for Filip Kehl
+
+## Goal
+Create a unique, immersive 3D e-portfolio for Filip Kehl, a Junior System Developer. The design should feature a specific color palette of Blue and Black and utilize advanced 3D animations to showcase technical skills and creativity.
+
+> [!NOTE]
+> This plan focuses on a "Cyber/Abyssal" aesthetic using deep blacks and vibrant blues.
+
+## Technical Stack
+- **Framework**: [Next.js](https://nextjs.org) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) (configured with custom Blue/Black theme)
+- **3D Graphics**: [Three.js](https://threejs.org), [React Three Fiber](https://docs.pmnd.rs/react-three-fiber), [Drei](https://github.com/pmndrs/drei)
+- **Animations**: [Framer Motion](https://www.framer.com/motion) (for UI transitions), [GSAP](https://greensock.com) (optional for complex timelines)
+- **Deployment**: Vercel (recommended)
+
+## Design Concept: "The Digital Abyss"
+- **Background**: Deep black (#050505) with subtle, dynamic blue (#0070f3, #00BFFF) nebula or grid effects.
+- **Typography**: Modern sans-serif (e.g., *Inter* or *Space Grotesk*) for readability, with monospaced accents for a "developer" feel.
+- **Interaction**: Mouse-driven parallax and lighting effects.
+
+## Site Structure & Content
+
+### 1. Hero Section
+- **Visual**: A 3D interactive scene (e.g., a floating, glowing geometric shape or a particle field that reacts to the cursor).
+- **Content**:
+  - Headline: "Filip Kehl"
+  - Subheadline: "Junior System Developer | .NET | Java | React"
+  - CTA: "Explore Work" (Triggers a camera fly-through to the Projects section).
+
+### 2. About Me
+- **Visual**: Text appearing as if typed or decoded.
+- **Content Source**: *Filip_Kehl_-_Cover_Letter.pdf*
+- **Key Points**:
+  - Passion for problem-solving and system development.
+  - Background in Java and .NET.
+  - proactive career approach (*Aktiv Karriärstart*).
+
+### 3. Skills Visualization
+- **Visual**: A 3D constelation or orbital system where each node is a skill. Hovering over a node highlights it in neon blue.
+- **Data Source**: Extracted from *Student-2.pdf* and *Cover Letter*.
+- **Skills to Highlight**:
+  - Languages: C#, Java, JavaScript, Python
+  - Web: React, HTML, CSS, .NET
+  - Tools: Git, SQL
+
+### 4. Projects (The "Portfolio")
+- **Visual**: A 3D carousel (Cylinder or Coverflow style). Each project is a floating "card" or "hololens".
+- **Content**:
+  - Placeholder for specific projects (need to extract details from *Student-2* or *Referenser*).
+  - Each project card shows: Title, Tech Stack, Brief Description.
+
+### 5. Career & Education
+- **Visual**: A vertical 3D timeline with glowing milestones.
+- **Content**:
+  - Education details from *Student-2*.
+  - Work experience/internships from *Arbetsgivarperspektiv*.
+  - *Min Valda Annons* (My Chosen Ad) can be used to show career aspirations/targets.
+
+### 6. Contact
+- **Visual**: A 3D interactive object (e.g., a holographic communication device) or a clean, glassmorphism form.
+- **Details**:
+  - Email: filipkehl@gmail.com
+  - LinkedIn/GitHub links.
+
+## User Review Required
+> [!IMPORTANT]
+> - Confirm if specific projects from *Student-2.pdf* should be highlighted.
+> - Verify if the "Cyber/Abyssal" theme aligns with your vision of "Blue and Black".
+> - `pdftotext` tools were unavailable, so content has been inferred from file metadata. Please define the exact text for the "About" section if specific phrasing is required.
+
+## Proposed File Structure
+```
+/src
+  /app
+    page.tsx (Main scroll container)
+    layout.tsx (Global styles & metadata)
+  /components
+    /canvas
+      HeroScene.tsx
+      SkillsGalaxy.tsx
+      ProjectCarousel.tsx
+    /ui
+      Navbar.tsx
+      TextOverlay.tsx
+      Loader.tsx
+  /assets
+    (textures, models)
+```

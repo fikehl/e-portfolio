@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-abyss-900: #050505;
+  --color-abyss-800: #0a0a0a;
+  --color-abyss-DEFAULT: #000000;
+  --color-nebula-500: #0070f3;
+  --color-nebula-400: #00BFFF;
+  --color-nebula-glow: rgba(0, 112, 243, 0.5);
+
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050505;
+  color: #e0e0e0;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0070f3;
+  border-radius: 3px;
+}
+
+/* Glow utility */
+.glow-blue {
+  box-shadow: 0 0 20px rgba(0, 112, 243, 0.4), 0 0 60px rgba(0, 112, 243, 0.1);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 112, 243, 0.5), 0 0 40px rgba(0, 112, 243, 0.2);
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 112, 243, 0.15);
+}
